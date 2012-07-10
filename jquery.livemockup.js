@@ -1,5 +1,3 @@
-
-
 ;(function($){
 	
 	
@@ -50,8 +48,13 @@
 			
 		}
 		
+		
+		
 		// Build a local configuration:
 		cfg = $.extend({},$.liveMockup.defaults,cfg);
+		
+		
+		
 		
 		// Initialization loop:
 		// If ImageReady plugin exists it is used to wait all images are ready!
@@ -68,8 +71,8 @@
 				
 			});
 			
-		} else {
-			
+		// No "ImageReady" plugin available!
+		} else {	
 			$(this).each(__loop,[cfg]);	
 			
 		}
@@ -96,8 +99,8 @@
 	
 	
 	
-	
-	
+
+
 /**
  * ---------------------------------------
  * Main Loop Logic
@@ -232,7 +235,7 @@
 	var __initMenu = function() {
 		
 		this.$menu.addClass('livemockup-menu').css({
-			width: this.r.w,
+			width: 	this.r.w,
 			height: this.r.h
 		});
 		
@@ -241,12 +244,22 @@
 		// Create slides menu
 		for ( var i=0; i<this.cards.length; i++ ) {
 			
+			var $img = $('<img>')
+				.attr( 'src', this.cards[i].$.find('img').attr('src') )
+				.css({
+					width: 	this.r.w / 3 - 50,
+					height: 'auto'
+				});
+			
 			var $lnk = $('<a>')
 				.addClass('livemockup-menu-link')
 				.attr( 'href', '#'+(i+1) )
-				.append( this.cards[i].$.find('img').clone().attr('style','') );
+				.css({
+					width: 	$img.outerWidth()+2,
+					height: 'auto'
+				});
 			
-			$wrap.append($lnk);
+			$wrap.append( $lnk.append( $img ) );
 			
 		}
 		
@@ -509,9 +522,9 @@
 	style += '.livemockup li img {display:block}';
 	style += '.livemockup li a {position:absolute;top:0;left:0;overflow:hidden}';
 	style += '.livemockup li a.show {background: rgba( 255, 255, 51, .6 );border:2px dashed #CCCC00}';
-	style += '.livemockup-menu {display:none;position:absolute;top:0;left:0;background:rgba(100,100,100,.4)}';
+	style += '.livemockup-menu {display:none;position:absolute;top:0;left:0;overflow:auto;background:rgba(100,100,100,.4)}';
 	style += '.livemockup-menu-wrapper {padding:1em}';
-	style += '.livemockup-menu a {display:block;width:80px;height:80px;overflow:hidden;float:left;margin: 0 5px 5px 0}';
+	style += '.livemockup-menu a {display:block;width:80px;height:80px;overflow:hidden;float:left;margin: 15px 10px 10px 15px}';
 	style += '.livemockup-menu a img {display:block;width:98%;height:auto;border:1px solid black;}';
 	
 	
